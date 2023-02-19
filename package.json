@@ -1,0 +1,25 @@
+{
+  "name": "fdn-nextjs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "female daily network frontend test",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "javascript",
+    "reactjs",
+    "nextjs"
+  ],
+  "author": "fateh ali",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^13.1.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.34.0"
+  }
+}
