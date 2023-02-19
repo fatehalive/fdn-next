@@ -5,7 +5,9 @@
   "description": "female daily network frontend test",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "dev": "next dev",
+    "build": "next build"
   },
   "keywords": [
     "javascript",
