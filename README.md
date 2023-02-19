@@ -9,6 +9,10 @@ Todos
   - [x] header
   - [x] footer
   - [x] content
+- [ ] Fill Contents
+  - [ ] header
+  - [ ] main
+  - [ ] footer
 - [ ] Styling
   - [ ] header
   - [ ] footer
