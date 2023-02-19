@@ -1,17 +1,17 @@
 import Layout from "@/components/Layout";
 
 const META = {
-    title: "Home",
-    description: "Hey SpiderMonkey, crawl me as homepage",
+    title: "Reviews",
+    description: "Hey SpiderMonkey, crawl me as reviewpage",
     favicon: {
         src: "/favicon.ico"
     }
 }
 
-export default function Home() {
+export default function Review() {
     return (
         <Layout meta={META} >
-            <div>HOMEPAGE CONTENT</div>
+            <div>REVIEW CONTENT</div>
         </Layout>
     )
 };
