@@ -5,6 +5,11 @@ Todos
   - [x] icons
   - [x] banner
   - [x] script
-- [ ] Layouting
-  - [ ] create header component
-  - [ ] create footer component
+- [x] Basic Layouting
+  - [x] header
+  - [x] footer
+  - [x] content
+- [ ] Styling
+  - [ ] header
+  - [ ] footer
+  - [ ] content
