@@ -44,6 +44,7 @@ export default function SideBar() {
       anchor={"left"}
       open={app.navigationToggle}
       onClose={handleClose}
+      onOpen={() => console.log("")}
       PaperProps={{
         component: "nav"
       }}
