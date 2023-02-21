@@ -10,7 +10,8 @@ Todos
   - [x] footer
   - [x] content
 - [ ] Fill Contents
-  - [ ] header
+  - [x] header
+  - [x] navigation
   - [ ] main
   - [ ] footer
 - [ ] Styling
