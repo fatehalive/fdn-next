@@ -1,0 +1,23 @@
+name: Test Aja
+
+on:
+  push:
+    branches: [development]
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: node:14
+    steps:
+      - uses: actions/checkout@v2
+      - name: Print My Input
+        run: ${{ inputs }}
+      - name: Print My Env's
+        run: echo env
+      - run: ${{ matrix }}
