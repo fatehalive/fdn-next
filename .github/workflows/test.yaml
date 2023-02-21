@@ -2,7 +2,7 @@ name: Test Aja
 
 on:
   push:
-    branches: [development]
+    branches: [feature/homepage]
   workflow_dispatch:
     inputs:
       logLevel:
