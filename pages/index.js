@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { 
   Button, Box, Card, CardContent, CardMedia, 
-  CardActionArea, Grid, Typography 
+  CardActionArea, Grid, Rating, Typography, Avatar, CardHeader 
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
@@ -24,24 +24,27 @@ const META = {
 const ADS_SPACES = ["Top Frame 970x50", "Billboard 970x50"]
 const PRODUCT_MATCHES = [
   {
+    id: 321,
     name: "VAL BY VALERIE THOMAS",
-    image: "/images/profile/user_1_arinda.png",
+    image: "/images/product/pupur.jpg",
     description: "Pure Pressed Blush",
     matchBy: "Match Skin Type",
     rating: 4.1,
     color: "Neutral Rose"
   },
   {
+    id: 654,
     name: "VAL BY VALERIE THOMAS",
-    image: "/images/profile/user_1_arinda.png",
+    image: "/images/product/serum.jpg",
     description: "Phito Pigment Liquid Serum Foundation",
     matchBy: "Match Skin Type",
     rating: 4.1,
     color: "Neutral Rose"
   },
   {
+    id: 987,
     name: "VAL BY VALERIE THOMAS",
-    image: "/images/profile/user_1_arinda.png",
+    image: "/images/product/serum.jpg",
     description: "Pure Pressed Blush",
     matchBy: "Match Skin Type",
     rating: 4.1,
@@ -106,51 +109,54 @@ export default function Home(props) {
         
         <Grid container id="editor-choice" component={"section"} justifyContent="center">
           <Grid item lg={9}>
-            <Typography
-              variant="h4"
-              children="Editor's Choice" 
-            />
-            <Typography 
-              variant="p"
-              children="Curated with love"
-            />
-            <Grid container justifyContent={"center"}>
-              {props.fdnWP["editor's choice"].map((choice, index) => (
-                <Grid key={index} item xs={12} sm={6} md={4} lg={3} xl={2}>
-                  <Card raised key={`choice${index}`}>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        height="140"
-                        image={choice.product.image}
-                        alt="green iguana"
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          {choice.product.name}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          {choice.product.description}
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
+            <Box sx={{ paddingY: 10 }}>
+              <Typography variant="h4">Editor's Choice</Typography>
+              <Typography variant="p">Curated with love</Typography>
+              <Grid container justifyContent={"center"} sx={{ marginTop: 5 }} spacing={3}>
+                {props.fdnWP["editor's choice"].map((choice, index) => (
+                  <Grid key={index} item xs={12} sm={6} md={4} lg={3} xl={2}>
+                    <Card raised key={`choice${index}`}>
+                      <CardActionArea>
+                        <CardHeader
+                          avatar={<Avatar alt={choice.editor} src={`/images/profile/user_${index+1}.png`}/>}
+                          title={choice.editor}
+                          subheader={choice.role}
+                        >
+                        </CardHeader>
+                        <CardMedia
+                          component="img"
+                          image={choice.product.image}
+                          alt={choice.product.name}
+                        />
+                        <CardContent>
+                          <Typography gutterBottom variant="h5" component="div">
+                            {choice.product.name}
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary">
+                            {choice.product.description}
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
           </Grid>
         </Grid>
         
         <Grid container id="match-products" component={"section"} justifyContent="center">
           <Grid item xs={12} sx={{ 
-            position: "relative",
-            border: "1px solid black",
+            height: 450,
+            // position: "relative",
+            // border: "1px solid black",
             backgroundColor: "#ffd9df",
-            zIndex: -1 
-            // backgroundImage: "url(/images/banner/model_makeup.png)",
-            // backgroundRepeat: "no-repeat"
+            backgroundImage: "url(/images/banner/model_makeup.png)",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: 320,
+            backgroundPositionY: "bottom"
           }}>
-            <Image src="/images/banner/model_makeup.png" alt="girl-makeup" />
+            {/* <Image src="/images/banner/background.png" alt="girl-makeup" /> */}
             <Grid container justifyContent={"center"}>
               <Grid item lg={9} sx={{ border: "1px dotted black" }}>
                 <Grid container>
@@ -158,7 +164,9 @@ export default function Home(props) {
                     <Box sx={{ display: "flex", flexDirection: "column" }}>
                       <Typography variant="h4">Looking for products that are just simply perfect for you?</Typography>
                       <Typography variant="p">Here are some products that we believe match your skin, hair, and body! Have we mentioned that they solve your concern too?</Typography>
-                      <Button variant="contained">See My Mathes</Button>
+                      <Box>
+                        <Button variant="contained">See My Mathes</Button>
+                      </Box>
                     </Box>
                   </Grid>
                   <Grid item md={8}>
@@ -169,16 +177,19 @@ export default function Home(props) {
                               <CardActionArea>
                                 <CardMedia
                                   component="img"
-                                  height="140"
                                   image={product.image}
-                                  alt="green iguana"
+                                  alt={product.name}
                                 />
                                 <CardContent>
+                                  <Rating name="read-only" value={product.rating} readOnly />
                                   <Typography gutterBottom variant="h5" component="div">
                                     {product.name}
                                   </Typography>
                                   <Typography variant="body2" color="text.secondary">
                                     {product.description}
+                                  </Typography>
+                                  <Typography variant="body1" color="text.secondary">
+                                    {product.color}
                                   </Typography>
                                 </CardContent>
                               </CardActionArea>
@@ -194,7 +205,23 @@ export default function Home(props) {
         </Grid>
           
         <Grid container id="campaign-internal" justifyContent={"center"}>
-
+          <Grid item xs={12} lg={8}>
+            <Box sx={{ paddingY: 10 }}>
+              <Box
+                children={`Horizontal 970x250\n(Internal Campaign Only)`} 
+                sx={{ 
+                  height: 250, 
+                  border: '1px solid #969696', 
+                  backgroundColor: '#d7d7d7',
+                  color: '#969696',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  fontWeight: 700,
+                  fontFamily: 'sans-serif'
+              }}/>
+            </Box>
+          </Grid>
         </Grid>
           
         <Grid container id="articles-latest" justifyContent={"center"}>
@@ -238,6 +265,7 @@ export async function getStaticProps() {
 
 /* -------------------- STYLE -------------------- */
 const Image = styled("img")(({ theme }) => ({
-  position: "absolute",
-  zIndex: -1,
+  // position: "absolute",
+  // zIndex: -1,
+  // visibility: "hidden"
 }))
