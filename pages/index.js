@@ -11,6 +11,7 @@ import Layout from "@/components/Layout";
 import { changePageName } from "@/redux/actions/app.reducer";
 import { whichSideRender } from "@/helpers";
 import { counter } from "@/utils";
+import api from '@/services/homepage.service';
 
 /* -------------------- CONFIG/CONSTANTS -------------------- */
 const counterId = counter();
@@ -253,12 +254,11 @@ export default function Home(props) {
 
 /* -------------------- NEXT SSG -------------------- */
 export async function getStaticProps() {
-    const res = await fetch(`${process.env.NEXT_APP_API_BASE_URL}/wp`);
-    const wp = await res.json();
+    const { data } = await api.getDataCampuran();
     return {
         props: {
             meta: META,
-            fdnWP: wp
+            fdnWP: data
         }
     }
 }
