@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 // import Link from "next/link";
 import { 
   AppBar, 
@@ -23,11 +24,13 @@ import {
   MoreVert as MoreIcon 
 } from "@mui/icons-material";
 import { styled, alpha } from "@mui/material/styles";
+import { toggleNav } from "@/redux/actions/app.reducer";
 
 /* -------------------- HEADER START -------------------- */
 export default function Header() {
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+    const dispatch = useDispatch();
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -47,6 +50,10 @@ export default function Header() {
 
     const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget);
+    };
+
+    const handleClickDrawer = () => {
+      dispatch(toggleNav())
     };
 
     const menuId = 'primary-search-account-menu';
@@ -143,6 +150,7 @@ export default function Header() {
               color="inherit"
               aria-label="open drawer"
               sx={{ mr: 2 }}
+              onClick={handleClickDrawer}
             >
               <MenuIcon />
             </IconButton>
