@@ -1,25 +1,30 @@
 import { useState } from "react";
-import Link from "next/link";
+// import Link from "next/link";
 import { 
-    AppBar, 
-    Box, 
-    Toolbar, 
-    IconButton, 
-    Typography,
-    InputBase,
-    Badge,
-    MenuItem,
-    Menu, 
+  AppBar, 
+  Box, 
+  Toolbar,
+  Button,
+  IconButton, 
+  Typography,
+  InputBase,
+  Badge,
+  MenuItem,
+  Menu,
+  Grid,
+  Link,
 } from "@mui/material";
 import { 
-    Menu as MenuIcon, 
-    Search as SearchIcon, 
-    AccountCircle as AccountCircle,
-    Mail as MailIcon,
-    Notifications as NotificationsIcon,
-    MoreVert as MoreIcon 
+  Menu as MenuIcon, 
+  Search as SearchIcon, 
+  AccountCircle as AccountCircle,
+  Mail as MailIcon,
+  Notifications as NotificationsIcon,
+  MoreVert as MoreIcon 
 } from "@mui/icons-material";
+import { styled, alpha } from "@mui/material/styles";
 
+/* -------------------- HEADER START -------------------- */
 export default function Header() {
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -130,7 +135,7 @@ export default function Header() {
         //     <button>Login/Signup</button>
         // </header>
       <Box component={"header"} sx={{ flexGrow: 2 }}>
-        <AppBar component={"div"} position="static">
+        <AppBarComposed component={"div"} position="static">
           <Toolbar>
             <IconButton
               size="large"
@@ -141,26 +146,20 @@ export default function Header() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ display: { xs: 'none', sm: 'block' } }}
-            >
-              MUI
-            </Typography>
-            {/* <Search>
+            <Link href="/"><img src="/icons/logo-fd.svg" alt="logo-brand" /></Link>
+            <Search>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
+              <InputBaseComposed
+                placeholder="Search products, articles, topics, brands, etc"
                 inputProps={{ 'aria-label': 'search' }}
               />
-            </Search> */}
+            </Search>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+              <Button variant="contained">Signup</Button>
+              {/* <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                 <Badge badgeContent={4} color="error">
                   <MailIcon />
                 </Badge>
@@ -184,7 +183,7 @@ export default function Header() {
                 color="inherit"
               >
                 <AccountCircle />
-              </IconButton>
+              </IconButton> */}
             </Box>
             <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
               <IconButton
@@ -195,13 +194,86 @@ export default function Header() {
                 onClick={handleMobileMenuOpen}
                 color="inherit"
               >
-                <MoreIcon />
+                <SearchIcon />
               </IconButton>
             </Box>
           </Toolbar>
-        </AppBar>
-    {renderMobileMenu}
-    {renderMenu}
+        </AppBarComposed>
+        <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
+          <Grid item>
+            <Link href="/category/skincare">SKINCARE</Link>
+          </Grid>
+          <Grid item>
+            <Link href="/category/makeup">MAKE UP</Link>
+          </Grid>
+          <Grid item>
+            <Link href="/category/body">BODY</Link>
+          </Grid>
+          <Grid item>
+            <Link href="/category/hair">HAIR</Link>
+          </Grid>
+          <Grid item>
+            <Link href="/category/fragance">FRAGRANCE</Link>
+          </Grid>
+          <Grid item>
+            <Link href="/category/nails">NAILS</Link>
+          </Grid>
+          <Grid item>
+            <Link href="/category/tools">TOOLS</Link>
+          </Grid>
+          <Grid item>
+            <Link href="/category/brands">BRANDS</Link>
+          </Grid>
+        </Grid>
+      {renderMobileMenu}
+      {renderMenu}
       </Box>
     )
 };
+
+/* -------------------- STYLE -------------------- */
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  border: `1px solid ${ theme.palette.text.primary }`,
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(3),
+    width: 'auto',
+  },
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const InputBaseComposed = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
+    },
+  },
+}));
+
+const AppBarComposed = styled(AppBar)(({ theme }) => ({
+  backgroundColor: theme.palette.common.white,
+  color: theme.palette.text.secondary
+}))
