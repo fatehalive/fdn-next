@@ -1,3 +1,24 @@
+# Getting Started
+
+clone project ini pada mesin anda dengan command:
+`git clone https://github.com/fatehalive/fdn-next.git`
+atau jika menggunakan ssh
+`git clone git@github.com:fatehalive/fdn-next.git`
+
+masuk direktori
+`cd fdn-next`
+
+install dependensi
+`npm i` atau `npm install`
+
+jalankan
+`npm run dev`
+
+## Demo
+anda bisa melihat demonya pada http://tests-femaledaily-local.fatehali.com
+
+* * *
+
 Todos
 - [x] Setup/Config
 - [x] Slicing
