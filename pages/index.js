@@ -2,15 +2,18 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { 
   Button, Box, Card, CardContent, CardMedia, 
-  CardActionArea, Grid, Rating, Typography, Avatar, CardHeader 
+  CardActionArea, Grid, Rating, Typography, Avatar, CardHeader, Container, Link as MuiLink
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { KeyboardArrowRight } from "@mui/icons-material"
 
 import { useDidMount } from "hooks/useDidMount";
 import Layout from "@/components/Layout";
 import { changePageName } from "@/redux/actions/app.reducer";
 import { whichSideRender } from "@/helpers";
 import { counter } from "@/utils";
+import api from '@/services/homepage.service';
+import Link from "next/link";
 
 /* -------------------- CONFIG/CONSTANTS -------------------- */
 const counterId = counter();
@@ -107,43 +110,45 @@ export default function Home(props) {
           </Grid>
         </Grid>
         
-        <Grid container id="editor-choice" component={"section"} justifyContent="center">
-          <Grid item lg={9}>
+        <Box id="editor-choice" component={"section"}>
+          <Container>
             <Box sx={{ paddingY: 10 }}>
-              <Typography variant="h4">Editor's Choice</Typography>
-              <Typography variant="p">Curated with love</Typography>
+              <Box>
+                <Typography variant="h4">Editor's Choice</Typography>
+                <Typography variant="p">Curated with love</Typography>
+              </Box>
               <Grid container justifyContent={"center"} sx={{ marginTop: 5 }} spacing={3}>
-                {props.fdnWP["editor's choice"].map((choice, index) => (
-                  <Grid key={index} item xs={12} sm={6} md={4} lg={3} xl={2}>
-                    <Card raised key={`choice${index}`}>
-                      <CardActionArea>
-                        <CardHeader
-                          avatar={<Avatar alt={choice.editor} src={`/images/profile/user_${index+1}.png`}/>}
-                          title={choice.editor}
-                          subheader={choice.role}
-                        >
-                        </CardHeader>
-                        <CardMedia
-                          component="img"
-                          image={choice.product.image}
-                          alt={choice.product.name}
-                        />
-                        <CardContent>
-                          <Typography gutterBottom variant="h5" component="div">
-                            {choice.product.name}
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {choice.product.description}
-                          </Typography>
-                        </CardContent>
-                      </CardActionArea>
-                    </Card>
-                  </Grid>
-                ))}
+              {props.fdnWP["editor's choice"].map((choice, index) => (
+                <Grid key={index} item xs={12} sm={6} md={4} lg={3} xl={2}>
+                  <Card raised key={`choice${index}`}>
+                    <CardActionArea>
+                      <CardHeader
+                        avatar={<Avatar alt={choice.editor} src={`/images/profile/user_${index+1}.png`}/>}
+                        title={choice.editor}
+                        subheader={choice.role}
+                      >
+                      </CardHeader>
+                      <CardMedia
+                        component="img"
+                        image={choice.product.image}
+                        alt={choice.product.name}
+                      />
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                          {choice.product.name}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {choice.product.description}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+              ))}
               </Grid>
             </Box>
-          </Grid>
-        </Grid>
+          </Container>
+        </Box>
         
         <Grid container id="match-products" component={"section"} justifyContent="center">
           <Grid item xs={12} sx={{ 
@@ -225,40 +230,106 @@ export default function Home(props) {
         </Grid>
           
         <Grid container id="articles-latest" justifyContent={"center"}>
-
+          <Grid item lg={9}>
+            <Box sx={{ paddingY: 5 }}>
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Box>
+                  <Typography variant="h4">Latest Article's</Typography>
+                  <Typography variant="p">So you can make better purchase decision</Typography>
+                </Box>
+                <Box>
+                  <MuiLink component={Link} href={"/editorials"}>
+                    <span>See more </span><KeyboardArrowRight style={{ verticalAlign: "text-top" }}/>
+                  </MuiLink>
+                </Box>
+              </Box>
+              <Grid container justifyContent={"center"} sx={{ marginTop: 3 }} spacing={2}>
+              {props.fdnWP["latest articles"].map((article, index) => (
+                <Grid key={index} item xs={12} sm={6} md={4}>
+                  <Card raised key={`article${index}`}>
+                    <CardActionArea>
+                      <CardContent>
+                      <CardMedia
+                        component="img"
+                        image={article.image}
+                        alt={article.title}
+                      />
+                        <Typography gutterBottom variant="h5" component="div">
+                          {article.title}
+                        </Typography>
+                        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                          <Typography variant="body2" color="text.secondary">
+                            {article.author}
+                          </Typography>
+                          <Typography variant="body1" color="text.secondary">
+                            {article.published_at}
+                          </Typography>
+                        </Box>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+              ))}
+              </Grid>
+            </Box>
+          </Grid>
         </Grid>
           
-        <Grid container id="reviews-latest" justifyContent={"center"}>
-
-        </Grid>
+        <Box component={"section"} id="reviews-latest">
+          <Container fixed sx={{ border: "1px solid black" }}>
+            <Box>
+              <Typography variant="h4">Latest Reviews</Typography>
+              <Typography variant="p">So you can make better purchase decision</Typography>
+            </Box>
+          </Container>
+        </Box>
           
-        <Grid container id="groups-popular" justifyContent={"center"}>
-
-        </Grid>
+        <Box component="section" id="groups-popular">
+          <Container fixed sx={{ border: "1px solid black" }}>
+          <Box>
+              <Typography variant="h4">Latest Article's</Typography>
+              <Typography variant="p">So you can make better purchase decision</Typography>
+            </Box>
+          </Container>
+        </Box>
           
-        <Grid container id="videos-latest" justifyContent={"center"}>
-
-        </Grid>
+        <Box component="section" id="videos-latest">
+          <Container fixed sx={{ border: "1px solid black" }}>
+          <Box>
+              <Typography variant="h4">Latest Article's</Typography>
+              <Typography variant="p">So you can make better purchase decision</Typography>
+            </Box>
+          </Container>
+        </Box>
           
-        <Grid container id="products-latest-trend" justifyContent={"center"}>
-
-        </Grid>
+        <Box component={"section"} id="products-latest-trend">
+          <Container fixed sx={{ border: "1px solid black" }}>
+          <Box>
+              <Typography variant="h4">Latest Article's</Typography>
+              <Typography variant="p">So you can make better purchase decision</Typography>
+            </Box>
+          </Container>
+        </Box>
           
-        <Grid container id="brands-top-n" justifyContent={"center"}>
-
-        </Grid>
+        <Box component={"section"} id="brands-top-n">
+          <Container fixed sx={{ border: "1px solid black" }}>
+          <Box>
+              <Typography variant="h4">Latest Article's</Typography>
+              <Typography variant="p">So you can make better purchase decision</Typography>
+            </Box>
+          </Container>
+        </Box>
       </Layout>
     )
 };
 
 /* -------------------- NEXT SSG -------------------- */
 export async function getStaticProps() {
-    const res = await fetch(`${process.env.NEXT_APP_API_BASE_URL}/wp`);
-    const wp = await res.json();
+    const { data } = await api.getDataCampuran();
     return {
         props: {
             meta: META,
-            fdnWP: wp
+            fdnWP: data
         }
     }
 }

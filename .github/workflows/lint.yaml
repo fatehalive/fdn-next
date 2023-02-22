@@ -1,0 +1,13 @@
+name: Test Aja
+run-name: Show code style from ${{ github.actor }}
+on:
+  push:
+    branches: [development]
+
+jobs:
+  test:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2
+      - name: Check Linting
+        run: npm run lint
