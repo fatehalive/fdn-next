@@ -1,0 +1,20 @@
+Todos
+- [x] Setup/Config
+- [x] Slicing
+  - [x] create file structure
+  - [x] icons
+  - [x] banner
+  - [x] script
+- [x] Basic Layouting
+  - [x] header
+  - [x] footer
+  - [x] content
+- [ ] Fill Contents
+  - [x] header
+  - [x] navigation
+  - [ ] main
+  - [ ] footer
+- [ ] Styling
+  - [ ] header
+  - [ ] footer
+  - [ ] content
